@@ -8,11 +8,11 @@ import icCaretDown from '../../assets/caretdown.svg'
 import icEnroll from '../../assets/Enrol Rec.svg'
 import icEnrollChecked from '../../assets/🦆 icon _Checkbox Checked_.svg'
 import btnEnroll from '../../assets/btnEnroll.svg'
+import { Link } from 'react-router-dom'
 
 import './SideNavBar.css'
 import './Header&Footer.css'
 import './Body.css'
-import { Link } from 'react-router-dom'
 
 function App() {
   const [count, setCount] = useState(0)
