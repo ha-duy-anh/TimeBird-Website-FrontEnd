@@ -26,6 +26,7 @@
 
 .textRow {
     display: flex;
+    padding-inline: 20px;
 }
 
 .textRow h3 {
@@ -61,6 +62,10 @@
     text-align: center;
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+.enroll-checkbox {
+    height: 40px;
 }
 .course-desc p {
     margin: 0;
@@ -77,7 +82,7 @@
     width: 40px;
 }
 .column-pr {
-    padding-right: 10px;
+
     box-sizing: border-box;
 }
 .detail-func {
