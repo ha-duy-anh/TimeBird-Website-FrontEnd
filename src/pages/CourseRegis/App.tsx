@@ -1,39 +1,68 @@
-import { useState } from 'react'
-import icEnrollChecked from '../../assets/🦆 icon _Checkbox Checked_.svg'
-import icEnroll from '../../assets/Enrol Rec.svg'
-import btnEnroll from '../../assets/btnEnroll.svg'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+
+import Unit from '../../models/unit'
+
+import SideNavBar from '../../components/SideNavBar'
+import Header from '../../components/Header'
 
 import './SideNavBar.css'
 import './Header&Footer.css'
 import './Body.css'
-import Unit from '../../models/unit'
-import SideNavBar from '../../components/SideNavBar'
-import Header from '../../components/Header'
+
+const baseURL = "http://localhost:3000/test/get_current_sem_reg";
+interface responseData{
+  status: "success" | "fail";
+  res_data: {
+    courses: Unit[];
+    sem_name: string;
+  }
+}
 
 function App() {
-  const [count, setCount] = useState(0)
-  const unit1: Unit = {name: 'Advanced Web Development', 
-  code: 'COS30002', 
-  desc: `This subject provides an overview of the fundamental concepts,
-  principles,and practices of Information Technology (IT), 
-  including hardware, software, networks, databases, and security.his subject provides an overview of the fundamental concepts,
-  principles,and practices of Information Technology (IT), 
-  including hardware, software, networks, databases, and security.`}
-  const unit2: Unit = {name: 'Advanced Web Development', 
-  code: 'COS30002', 
-  desc: `This subject provides an overview of the fundamental concepts,
-  principles,and practices of Information Technology (IT), 
-  including hardware, software, networks, databases, and security.his subject provides an overview of the fundamental concepts,
-  principles,and practices of Information Technology (IT), 
-  including hardware, software, networks, databases, and security.`}
-  const unit3: Unit = {name: 'Advanced Web Development', 
-  code: 'COS30002', 
-  desc: `This subject provides an overview of the fundamental concepts,
-  principles,and practices of Information Technology (IT), 
-  including hardware, software, networks, databases, and security.his subject provides an overview of the fundamental concepts,
-  principles,and practices of Information Technology (IT), 
-  including hardware, software, networks, databases, and security.`}
-  const units: Unit[] = [unit1, unit2, unit3]
+  const [post, setPost] = useState<responseData | null>(null);
+
+  useEffect(() => {
+    const controller = new AbortController()
+    axios.get(baseURL, {signal: controller.signal}).then((res) => {
+      setPost(res.data as responseData);
+      console.log(res.data);
+    })
+    .catch((error) => {
+      if(controller.signal.aborted) {
+        console.log('Request Aborted')
+      }
+      else {
+        console.log(error)
+      }
+    })
+    return() => {
+      controller.abort()
+    }
+  }, []);
+
+  // const unit1: Unit = {name: 'Advanced Web Development', 
+  // code: 'COS30002', 
+  // desc: `This subject provides an overview of the fundamental concepts,
+  // principles,and practices of Information Technology (IT), 
+  // including hardware, software, networks, databases, and security.his subject provides an overview of the fundamental concepts,
+  // principles,and practices of Information Technology (IT), 
+  // including hardware, software, networks, databases, and security.`}
+  // const unit2: Unit = {name: 'Advanced Web Development', 
+  // code: 'COS30002', 
+  // desc: `This subject provides an overview of the fundamental concepts,
+  // principles,and practices of Information Technology (IT), 
+  // including hardware, software, networks, databases, and security.his subject provides an overview of the fundamental concepts,
+  // principles,and practices of Information Technology (IT), 
+  // including hardware, software, networks, databases, and security.`}
+  // const unit3: Unit = {name: 'Advanced Web Development', 
+  // code: 'COS30002', 
+  // desc: `This subject provides an overview of the fundamental concepts,
+  // principles,and practices of Information Technology (IT), 
+  // including hardware, software, networks, databases, and security.his subject provides an overview of the fundamental concepts,
+  // principles,and practices of Information Technology (IT), 
+  // including hardware, software, networks, databases, and security.`}
+  // const units: Unit[] = [unit1, unit2, unit3]
 
   function toggleDetail(index: String) {
     let a = document.getElementById('desc' + index) as HTMLElement
@@ -51,7 +80,7 @@ function App() {
       <SideNavBar />
       <Header />
 
-      <h2 className='currentCourseText'>Currently Available Courses - Summer 2023</h2>
+      <h2 className='currentCourseText'>Currently Available Courses - {post?.res_data.sem_name}</h2>
 
       {/* Main Section */}
       <div className='courses'>
@@ -63,13 +92,13 @@ function App() {
           <h3 className='column_name enroll'>Enroll</h3>
         </div>
         
-        {units.map((unit, index) => 
+        {post?.res_data.courses.map((unit, index) => 
         <div className="outer-container" key={index}>
-          <div className="course-name column-pr">{unit.name}</div>
-          <div className="course-code column-pr">{unit.code}</div>
+          <div className="course-name column-pr table-content">{unit.name}</div>
+          <div className="course-code column-pr table-content">{unit.unit_id}</div>
           <div className="course-desc column-pr">
             {//@ts-ignore 
-            <p className='desc' id={"desc" + String(index)} expanded='false'>{unit.desc}</p>}
+            <p className='desc table-content' id={"desc" + String(index)} expanded='false'>{unit.description}</p>}
            <p onClick={() => toggleDetail(String(index))} className='detail-func'>More Details</p>
           </div>
           <div className='column-pr enroll'>
@@ -79,17 +108,11 @@ function App() {
       </div>
       
       {/* Button to Enroll Courses */}
-      <div className='enrollBtn'>
-        <a href='#' target='_blank'>
-          <img src={btnEnroll} className='btnEnroll' alt='Confirm Button'/>
-        </a>
+      <div>
+        <button  className='enrollBtn'>
+          Confirm
+        </button>
       </div>
-
-      <footer>
-        <div className='footer'>
-          <h5>Footer</h5>
-        </div>
-      </footer>
     </body>
   )
 }

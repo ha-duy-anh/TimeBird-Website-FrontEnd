@@ -64,9 +64,6 @@
     justify-content: center;
     align-items: center;
 }
-.enroll-checkbox {
-    height: 40px;
-}
 .course-desc p {
     margin: 0;
     padding: 0;
@@ -80,9 +77,11 @@
 }
 .enroll-checkbox {
     width: 40px;
+    height: 40px;
+    border: 2px solid #2B4EA2;
+    box-sizing: border-box;
 }
 .column-pr {
-
     box-sizing: border-box;
 }
 .detail-func {
@@ -96,4 +95,17 @@
     position: fixed;
     top: 850px;
     left: 1707px;
+    color: #2B4EA2;
+    border: 3px solid #2B4EA2;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    width: 150px;
+    font-size: 24px;
 }
+
+.table-content {
+    font-size: 22px;
+    font-weight: 500;
+}
+
+
