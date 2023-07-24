@@ -14,23 +14,50 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 interface Enrollment {
-  enrolled_date : number;
-  result : string;
-  semester_id : string;
-  unit_id : string;
-  updated_at : number;
-  updated_by : string;
-  user_id : number;
-  _id : string
+  result : string
+  unit_id : string
+}
+
+interface Course {
+  unit_id: string
+  name: string
 }
 
 interface responseData{
   status: "success" | "fail";
   res_data: {
-    courses: Enrollment[];
-    start_date: number;
-    end_date: number;
+    courses: Course[]
+    enrollments: Enrollment[]
+    start_date: number
+    end_date: number
   }
+}
+
+function formatDate(date : Date) : string{
+  const dDate = date.getDate()
+  let dString = dDate.toString()
+  if (dDate < 10) {
+    dString = "0" + dString
+  }
+
+  const mDate = date.getMonth() + 1
+  let mString = mDate.toString()
+  if (mDate < 10) {
+    mString = "0" + mString
+  }
+
+  const yDate = date.getFullYear()
+  let yString = yDate.toString()
+
+  return dString + "/" + mString + "/" + yString
+}
+
+function returnCourseName(courses : Course[], unit_id : string) : string{
+  const result = courses.find(unit => {
+    return unit.unit_id === unit_id
+  })
+  console.log("result: " + result?.name)
+  return result?.name || ""
 }
 
 function App() {
@@ -40,6 +67,7 @@ function App() {
     const controller = new AbortController()
     axios.get('http://localhost:3000/test/get_current_sem_stu', {signal: controller.signal}).then((res) => {
       setPost(res.data)
+      console.log(res.data)
     })
     .catch((error) => {
       if(controller.signal.aborted) {
@@ -55,7 +83,7 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <div className="outmost-container">
       <nav className='sidebar'>
         <div className='side'>
           <a className='active' href="#" target="_blank">
@@ -107,12 +135,12 @@ function App() {
         <h4>Courses</h4>
       </div>
 
-      <div className="left-[361px] top-[440px] absolute">
+      <div className="ml-[361px] mt-[380px]">
         <div className="grid grid-cols-2 gap-5">
-        {post?.res_data.courses.map((unit, index) => 
+        {post?.res_data.enrollments.map((unit, index) => 
           <div className='Courses1' key={index}>
             <div className='content_courses'>
-              <p className='p1'>{unit.unit_id}</p>
+              <p className='p1'>{returnCourseName(post?.res_data.courses, unit.unit_id)}</p>
               <span>{unit.unit_id}</span>
               <span className='result1'>Result</span>
               <div>
@@ -120,14 +148,14 @@ function App() {
                 <span className='widget_start'>Start Date</span> 
                 <span className='widget_end'>End Date</span>
                 <span>
-                  <progress className='widget_progress' value="50" max="100"></progress>
+                  <progress className='widget_progress' value={unit.result} max="100"></progress>
                 </span>
                 <span className='progress1'>{unit.result}</span>
               </div> 
 
               <div className='widget_1'>
-                <span className='widget_days'><div className='rectangle'>{new Date(post.res_data.start_date).toString()}</div></span>
-                <span className='widget_ends'><div className='rectangle2'>{new Date(post.res_data.end_date).toString()}</div></span>
+                <span className='widget_days'><div className='rectangle'>{formatDate(new Date(post.res_data.start_date))}</div></span>
+                <span className='widget_ends'><div className='rectangle2'>{formatDate(new Date(post.res_data.end_date))}</div></span>
               </div>
             </div>
           </div>

@@ -53,63 +53,22 @@ top: 95px;
 }
 
 .Courses1{
-    width: 758px;
-    height: 228px;
     background: #FFFFFF;
     border-radius: 5px;
-}
-
-.Courses2{
-    position: absolute;
-    width: 758px;
-    height: 228px;
-    left: 1132px;
-    top: 446px;
-    position: absolute;
-    width: 758px;
-    height: 228px;
-    left: 1132px;
-    top: 446px;
-    background: #FFFFFF;
-    border-radius: 5px;    
-}
-
-.Courses3{
-    position: absolute;
-width: 758px;
-height: 228px;
-left: 361px;
-top: 692px;
-background: #FFFFFF;
-border-radius: 5px;
-}
-
-.Courses4{
-    position: absolute;
-    width: 758px;
-    height: 228px;
-    left: 1132px;
-    top: 692px;
-background: #FFFFFF;
-border-radius: 5px;
+    padding: 50px 10px 50px 10px;
 }
 
 .footer{
-    position: absolute;
-
-
-font-style: normal;
-font-weight: 400;
-font-size: 22px;
-line-height: 27px;
-position: absolute;
-width: 1596px;
-height: 64px;
-left: 324px;
-bottom: -164px;
-background: #FFFFFF;
-
-color: #000000;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 27px;
+    width: calc(100vw - 321px);
+    height: 64px;
+    margin-top: 20px;
+    margin-left: 321px;
+    background: #FFFFFF;
+    color: #000000;
 }
 
 h6.footer{
@@ -198,4 +157,9 @@ width: 239px;
 height: 15px;
 left: 736px;
 top: 566px;
+}
+
+.outmost-container {
+    display: grid;
+    grid-template-rows: 1fr auto 1fr;
 }
