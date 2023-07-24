@@ -11,10 +11,10 @@ class SideNavBar extends React.Component {
     render() {
         return (
             <div>
-                <div className="absolute w-[320px] h-screen top-0 bg-[#ffffff]">
+                <div className="absolute w-[270px] h-screen top-0 bg-[#ffffff] flex flex-col">
                     <img 
                         src={schoolLogo}
-                        className="ml-[68px]"
+                        className="mx-auto"
                         alt="School Logo"
                     />
 

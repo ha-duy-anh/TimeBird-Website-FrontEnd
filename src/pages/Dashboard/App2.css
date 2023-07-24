@@ -1,17 +1,18 @@
 .text_banner1{
     position: absolute;
-width: 264px;
-height: 28px;
-left: 393px;
-top: 149px;
+    width: 264px;
+    height: 28px;
+    left: 393px;
+    top: 149px;
 
-font-style: normal;
-font-weight: 700;
-font-size: 20px;
-line-height: 28px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 28px;
 
-color: #FFFFFF;
+    color: #FFFFFF;
 }
+
 .text_banner2{
     position: absolute;
     width: 595px;

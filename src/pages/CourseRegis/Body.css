@@ -2,7 +2,7 @@
     position: absolute;
     width: 691px;
     height: 39px;
-    left: 412px;
+    left: 312px;
     top: 110px;
     font-family: 'Inter';
     font-weight: 700;
@@ -13,7 +13,7 @@
 
 .courses {
     border-radius: 10px;
-    left: 368px;
+    left: 318px;
     top: 211px;
     width: 1503px;
     height: 607px;
@@ -22,6 +22,7 @@
     padding: 12px 33px 12px 33px;
     box-sizing: border-box;
     overflow: scroll;
+    overflow-x: hidden;
 }
 
 .textRow {
@@ -72,6 +73,7 @@
     height: 100px;
     overflow: hidden;
 }
+
 .desc[expanded='true'] {
     height: auto;
 }
@@ -83,6 +85,7 @@
 }
 .column-pr {
     box-sizing: border-box;
+    padding-right: 80px;
 }
 .detail-func {
     text-decoration: underline;
@@ -92,9 +95,9 @@
 }
 
 .enrollBtn {
-    position: fixed;
-    top: 850px;
-    left: 1707px;
+    position: absolute;
+    right: 40px;
+    bottom: 20px;
     color: #2B4EA2;
     border: 3px solid #2B4EA2;
     border-radius: 10px;
