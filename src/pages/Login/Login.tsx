@@ -3,27 +3,41 @@ import image from "../../assets/login-bg.png";
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 
-export default function Login(props: any) {
+export default function Login() {
   const [credentials, setCredentials] = useState({
-    email: "",
+    username: "",
     password: ""
   });
   const [rememberMe, setRememberMe] = useState(false);
 
   function handleCredentials(e: any) {
     setCredentials({
-      email: e.target.id == "email" ? e.target.value : credentials.email,
+      username: e.target.id == "username" ? e.target.value : credentials.username,
       password:
         e.target.id == "password" ? e.target.value : credentials.password
     });
   }
 
-  const nav = useNavigate()
+  
   function handleOnSubmit(e: any) {
     e.preventDefault();
-    console.log("12345")
-  
-    nav("/dashboard")
+    if (credentials.username !== '' && credentials.password !== '') {
+      axios.post('http://localhost:3000/user/verifyUser', 
+          credentials, 
+          { withCredentials: true }
+      ).then(() => {
+        const nav = useNavigate()
+        nav("/dashboard")
+      }).catch(err => {
+        console.log(err)
+      })
+    }
+    /*axios.get('http://localhost:3000/user/testCookie', 
+      {withCredentials: true}
+    ).then(res => {
+      console.log(res)
+    })*/
+    //nav("/dashboard")
     // axios
     //   .post("", credentials)
     //   .then(res => {
@@ -34,10 +48,6 @@ export default function Login(props: any) {
     //     console.log(error);
     //   });
   }
-
-  useEffect(() => {
-    /* console.log(credentials, rememberMe); */
-  });
 
   return (
     <div className="relative w-screen h-screen bottom-0">
@@ -72,10 +82,10 @@ export default function Login(props: any) {
           font-[400] text-[32px] leading-[38px] 
           px-[30px]
           border-[3px] border-[#ACACAC] rounded-[5px] focus:outline-0 focus:border-[#2B4EA2]"
-          placeholder="Email"
+          placeholder="Username"
           onChange={e => handleCredentials(e)}
-          id="email"
-          value={credentials.email}
+          id="username"
+          value={credentials.username}
         />
 
         <input
