@@ -11,23 +11,30 @@ const app = () => {
 
     //Try to verify and set user
     useEffect( () => {
-        handleSetUser()
+        initialSetUser()
     }, [])
+
+    const handleSetUser = (e : string | null) => {
+        setUser(e?e:"")
+    }
 
     const handleUnsetUser = () => {
         setUser(undefined)
     }
 
-    const handleSetUser = () => {
+    const initialSetUser = () => {
         axios.get('http://localhost:3000/user/verifyUser')
         .then((response) => 
             response.data.text()
         ).then((data) => {
+            console.log(data)
             setUser(data)
         }).catch(() => {
             setUser(undefined)
         })
     } 
+
+
 
     return (
         <BrowserRouter>
@@ -39,7 +46,7 @@ const app = () => {
                 </RouteGuard>
             }/>
             <Route path='/admin' element={
-                <RouteGuard user={user} requiredRole="admin">
+                <RouteGuard user={user} requiredRole="superadmin">
                     <AdminRoute />
                 </RouteGuard>
             }/>

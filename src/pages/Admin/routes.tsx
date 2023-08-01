@@ -4,7 +4,7 @@ import CourseManagement from './ManageCourses/ManageCourses'
 const student = () => {
   return (
     <Routes>
-        <Route path='/course-management' element={
+        <Route path='/' element={
             <CourseManagement />
         }/>
     </Routes>

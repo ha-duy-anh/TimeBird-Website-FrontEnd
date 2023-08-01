@@ -5,7 +5,7 @@ import Dashboard from './Dashboard/App.tsx'
 const student = () => {
   return (
     <Routes>
-        <Route path='/dashboard' element={
+        <Route path='/' element={
             <Dashboard />
         }/>
 

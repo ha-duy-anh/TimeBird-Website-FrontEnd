@@ -7,7 +7,7 @@ interface RouteGuardProp {
 }
 
 const protectedRoute = (prop : RouteGuardProp) => {
-    if (!prop.user || prop.user != prop.requiredRole) {
+    if (!prop.user || prop.user.toLowerCase() != prop.requiredRole.toLowerCase()) {
         return <Navigate to="/" replace />;
     }
   

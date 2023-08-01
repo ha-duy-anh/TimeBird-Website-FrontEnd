@@ -1,8 +1,9 @@
 import { useState } from "react"
-import image from "../../assets/login-bg.png"
+import image from "assets/login-bg.png"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
-import { AuthProp } from "../../models/authprop";
+import { AuthProp } from "../../models/authprop"
+import style from './style.module.css'
 
 export default function Login(prop : AuthProp) {
   const [credentials, setCredentials] = useState({
@@ -12,6 +13,8 @@ export default function Login(prop : AuthProp) {
 
   const [invalidForm, setInvalidForm] = useState(false)
   const [rememberMe, setRememberMe] = useState(false)
+  const [errorMsg, setErrorMsg] = useState("")
+  const nav = useNavigate()
 
   function handleCredentials(e: any) {
     setCredentials({
@@ -21,29 +24,37 @@ export default function Login(prop : AuthProp) {
     });
   }
 
-  
   function handleOnSubmit(e: any) {
     e.preventDefault();
     if (credentials.username !== '' && credentials.password !== '') {
       axios.post('http://localhost:3000/user/verifyUser', 
           credentials, 
           { withCredentials: true }
-      ).then(() => {
-        prop.setUser
-        const nav = useNavigate()
-        nav("/dashboard")
-      }).catch(err => {
-        console.log(err)
+      ).then((response) => {
+        console.log(response.data)
+        if (response.data.role.toLowerCase() === 'student') {
+          nav('/student')
+          prop.setUser('student')
+        } else if (response.data.role.toLowerCase() === 'superadmin') {
+          prop.setUser(response.data)
+          nav('/admin')
+        }
+      }).catch(() => {
         prop.unsetUser
       })
     } else {
       setInvalidForm(true)
+      setErrorMsg("All fields are required.")
+      if (credentials.username == '')
+        document.getElementById('username')?.setAttribute('data-error', 'true')
+      if (credentials.password == '')
+        document.getElementById('password')?.setAttribute('data-error', 'true')
     }
   }
 
   return (
     <div className="flex w-screen h-screen">
-      <div className="w-[40%] bg-[#2B4EA2] grid justify-center align-middle items-center">
+      <div className="w-[45%] bg-[#2B4EA2] grid justify-center align-middle items-center">
         <img
           src={image}
           className="w-[75%] h-auto mx-auto"
@@ -51,23 +62,24 @@ export default function Login(prop : AuthProp) {
         />
       </div>
 
-      <div className="w-[60%] h-full bg-[#FFFFFF] flex">
-        <div className="inline-block w-[80%] m-auto">
-          <form action="" method="POST" onSubmit={e => handleOnSubmit(e)} className="grid gap-6 justify-start">
-            <div
-              className="font-[700] text-[48px] leading-[56px] text-[#2B4EA2]"
-            >
+      <div className="w-[55%] h-full bg-[#FFFFFF] flex">
+        <div className="w-full flex justify-center">
+          <form action="" method="POST" onSubmit={ e => handleOnSubmit(e)} 
+            className="grid gap-6 justify-start w-fit box-border h-fit my-auto"
+          >
+            <div className="font-[700] text-[48px] leading-[56px] text-[#2B4EA2]">
               Welcome to University A Portal
             </div>
-            <div
-              className="font-[300] text-[24px] leading-[28px] text-[#000000]"
-            >
+
+            <div className="font-[300] text-[24px] leading-[28px] text-[#000000]">
               Enter your credentials to continue
             </div>
             <input
+              //@ts-ignore
+              data-error="false"
               type="text"
-              className=" w-full h-[80px] font-[400] text-[32px] leading-[38px] px-[30px]
-              border-[3px] border-[#ACACAC] rounded-[5px] focus:outline-0 focus:border-[#2B4EA2]"
+              className={style.error_outline + ` w-full h-[80px] font-[400] text-[32px] leading-[38px] px-[30px]
+              border-[3px] border-[#ACACAC] rounded-[5px] focus:border-[#2B4EA2] focus:border-[3px]`}
               placeholder="Username"
               onChange={e => handleCredentials(e)}
               id="username"
@@ -76,8 +88,8 @@ export default function Login(prop : AuthProp) {
             
             <input
               type="password"
-              className="w-full h-[80px] font-[400] text-[32px] leading-[38px]
-              px-[30px] border-[3px] border-[#ACACAC] rounded-[5px] focus:outline-0 focus:border-[#2B4EA2]"
+              className={style.error_outline + ` w-full h-[80px] font-[400] text-[32px] leading-[38px]
+              px-[30px] border-[3px] border-[#ACACAC] rounded-[5px] focus:outline-[#2B4EA2]`}
               placeholder="Password"
               id="password"
               value={credentials.password}
@@ -85,7 +97,7 @@ export default function Login(prop : AuthProp) {
             />
 
             {invalidForm == true 
-              ? <p className="text-center text-red-700 font-medium">All fields are required *</p>
+              ? <p className=" text-red-700 font-medium">{errorMsg}</p>
               : <p className="invisible">Placeholder</p>
             }
 
