@@ -1,11 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import CourseRegis from './CourseRegis/App.tsx'
-import Dashboard from './Dashboard/App.tsx'
-import Login from './Login/Login.tsx'
-import Admin_Courses from './ManageCourses/ManageCourses.tsx'
 import { useEffect, useState } from "react"
 import axios from "axios"
-import RouteGuard from '../components/routeGuard.tsx'
+import RouteGuard from 'components/routeGuard.tsx'
+import Login from './Login/Login.tsx'
+import StudentRoute from './Student/routes.tsx'
+import AdminRoute from './Admin/routes.tsx'
 
 const app = () => {
     const [user, setUser] = useState<string>()
@@ -34,18 +33,16 @@ const app = () => {
         <BrowserRouter>
         <Routes>
             <Route path='/' element={<Login unsetUser={handleUnsetUser} setUser={handleSetUser}/>}/>
-            <Route path='/dashboard' element={
-                <RouteGuard user={user}>
-                    <Dashboard />
-                </RouteGuard>}/>
-            <Route path="/course-registration" element={
-                <RouteGuard user={user}>
-                    <CourseRegis />
-                </RouteGuard>}/>
-            <Route path='/admin-courses' element={
-                <RouteGuard user={user}>
-                    <Admin_Courses />
-                </RouteGuard>}/>
+            <Route path='/student' element={
+                <RouteGuard user={user} requiredRole="student">
+                    <StudentRoute />
+                </RouteGuard>
+            }/>
+            <Route path='/admin' element={
+                <RouteGuard user={user} requiredRole="admin">
+                    <AdminRoute />
+                </RouteGuard>
+            }/>
         </Routes>
     </BrowserRouter>
   )

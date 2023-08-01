@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-import Unit from '../../models/unit'
+import Unit from 'models/unit'
 
-import SideNavBar from '../../components/SideNavBar'
-import Header from '../../components/Header'
+import SideNavBar from 'components/SideNavBar'
+import Header from 'components/Header'
 
 import './SideNavBar.css'
 import './Header&Footer.css'
