@@ -50,118 +50,81 @@ export default function Login() {
   }
 
   return (
-    <div className="relative w-screen h-screen bottom-0">
-      <div className="absolute w-screen h-screen bg-[#2B4EA2]">
+    <div className="flex w-screen h-screen">
+      <div className="w-[40%] bg-[#2B4EA2] grid justify-center align-middle items-center">
         <img
           src={image}
-          className="absolute w-[849px] h-[800px] -left-[19px] top-[140px] mix-blend-screen"
+          className="w-2/3 h-auto mx-auto"
           alt=""
         />
       </div>
 
-      <div className="absolute w-[1109px] h-screen bg-[#FFFFFF] right-[0px]"></div>
-      <div
-        className="absolute min-w-[670px] h-[56px] 
-        max-lg:left-[50%] max-lg:translate-x-[-50%] lg:right-[220px] top-[292px] 
-        font-[700] text-[48px] leading-[56px] text-[#2B4EA2]"
-      >
-        Welcome to Universiry A Portal
-      </div>
-      <div
-        className="absolute min-w-[670px] h-[28px] 
-        max-lg:left-[50%] max-lg:translate-x-[-50%] lg:right-[220px] top-[372px] 
-        font-[300] text-[24px] leading-[28px] text-[#000000]"
-      >
-        Enter your credentials to continue
-      </div>
-      <form action="" method="POST" onSubmit={e => handleOnSubmit(e)}>
-        <input
-          type="text"
-          className="absolute w-[670px] h-[80px] 
-          max-lg:left-[50%] max-lg:translate-x-[-50%] lg:right-[220px] top-[460px] 
-          font-[400] text-[32px] leading-[38px] 
-          px-[30px]
-          border-[3px] border-[#ACACAC] rounded-[5px] focus:outline-0 focus:border-[#2B4EA2]"
-          placeholder="Username"
-          onChange={e => handleCredentials(e)}
-          id="username"
-          value={credentials.username}
-        />
+      <div className="w-[60%] h-full bg-[#FFFFFF] flex justify-center">
+        <div className="inline-block w-[80%] m-auto">
+          <form action="" method="POST" onSubmit={e => handleOnSubmit(e)} className="grid gap-6 justify-start">
+            <div
+              className="font-[700] text-[48px] leading-[56px] text-[#2B4EA2]"
+            >
+              Welcome to University A Portal
+            </div>
+            <div
+              className="font-[300] text-[24px] leading-[28px] text-[#000000]"
+            >
+              Enter your credentials to continue
+            </div>
+            <input
+              type="text"
+              className=" w-full h-[80px] font-[400] text-[32px] leading-[38px] px-[30px]
+              border-[3px] border-[#ACACAC] rounded-[5px] focus:outline-0 focus:border-[#2B4EA2]"
+              placeholder="Username"
+              onChange={e => handleCredentials(e)}
+              id="username"
+              value={credentials.username}
+            />
 
-        <input
-          type="password"
-          className="absolute w-[670px] h-[80px] 
-          max-lg:left-[50%] max-lg:translate-x-[-50%] lg:right-[220px] top-[600px] 
-          font-[400] text-[32px] leading-[38px] 
-          px-[30px]
-          border-[3px] border-[#ACACAC] rounded-[5px] focus:outline-0 focus:border-[#2B4EA2]"
-          placeholder="Password"
-          id="password"
-          value={credentials.password}
-          onChange={e => handleCredentials(e)}
-        />
-        <div
-          className="absolute min-w-[670px] h-[33px]
-          max-lg:left-[50%] max-lg:translate-x-[-50%] lg:right-[220px] top-[719px]
-        "
-        >
-          <input
-            type="checkbox"
-            className="absolute w-[33px] h-[33px]
-            border-[2px] border-[#000000] rounded-[5px]"
-            onChange={() => setRememberMe(!rememberMe)}
-            id="rememberMe"
-            checked={rememberMe}
-          />
-          <label
-            className="absolute min-w-[157px] h-[28px]
-            left-[54px]
-            font-[400] text-[24px] leading-[28px] text-black" >
-            Remember me
-          </label>
+            <input
+              type="password"
+              className="w-full h-[80px] font-[400] text-[32px] leading-[38px]
+              px-[30px] border-[3px] border-[#ACACAC] rounded-[5px] focus:outline-0 focus:border-[#2B4EA2]"
+              placeholder="Password"
+              id="password"
+              value={credentials.password}
+              onChange={e => handleCredentials(e)}
+            />
+            <div
+              className="min-w-[670px] h-[33px] flex justify-between"
+            >
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  className="w-[33px] h-[33px] border-[2px] border-[#000000] rounded-[5px]"
+                  onChange={() => setRememberMe(!rememberMe)}
+                  id="rememberMe"
+                  checked={rememberMe}
+                />
+                <label
+                  className="min-w-[157px] h-[28px]
+                  font-[400] text-[24px] leading-[28px] text-black" >
+                  Remember me
+                </label>
+              </div>
+              <p
+                className="min-w-[244px] h-[28px]
+                font-[400] text-[24px] leading-[28px] underline"
+              >
+                Forgot your password?
+              </p>
+            </div>
 
-          <p
-            className="absolute min-w-[244px] h-[28px]
-            right-0
-            font-[400] text-[24px] leading-[28px] underline"
-          >
-            Forgot your password?
-          </p>
+            <input
+              type="submit"
+              className="w-full h-[82px] bg-[#FF9D35] rounded-[5px] text-white font-[400] text-[40px] 
+              leading-[47px] hover:bg-[#ff8808] hover:cursor-pointer"
+              value={"Login"}
+            />
+          </form>
         </div>
-
-        {/* <input
-          type="checkbox"
-          className="absolute w-[33px] h-[33px] 
-            max-lg:left-[19%] max-lg:translate-x-[-50%] lg:right-[857px] top-[719px]
-            border-[2px] border-[#000000] rounded-[5px]"
-          onChange={() => setRememberMe(!rememberMe)}
-          id="rememberMe"
-          checked={rememberMe}
-        />
-        <label
-          className="absolute min-w-[157px] h-[28px] 
-            max-lg:left-[30%] max-lg:translate-x-[-50%] lg:right-[679px] top-[722px]
-            font-[400] text-[24px] leading-[28px]"
-        >
-          Remember me
-        </label>
-
-        <p
-          className="absolute min-w-[244px] h-[28px] right-[220px] top-[722px]
-            font-[400] text-[24px] leading-[28px] underline"
-        >
-          Forgot your password?
-        </p> */}
-
-        <input
-          type="submit"
-          className="absolute w-[670px] h-[82px] 
-          max-lg:left-[50%] max-lg:translate-x-[-50%] lg:right-[220px] top-[789px]
-          bg-[#FF9D35] rounded-[5px]
-          text-white font-[400] text-[40px] leading-[47px]"
-          value={"Login"}
-        />
-      </form>
+      </div>
     </div>
   );
 }

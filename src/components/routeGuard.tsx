@@ -8,9 +8,7 @@ interface RouteGuardProp {
 
 const protectedRoute = (prop : RouteGuardProp) => {
     if (!prop.user) {
-        const nav = useNavigate()
-        nav("/")
-        return
+        return <Navigate to="/" replace />;
     }
   
     return prop.children;

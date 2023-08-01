@@ -25,6 +25,8 @@ const app = () => {
             response.data.text()
         ).then((data) => {
             setUser(data)
+        }).catch(() => {
+            setUser(undefined)
         })
     } 
 
