@@ -2,13 +2,16 @@ import { useState } from "react"
 import image from "../../assets/login-bg.png"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import { AuthProp } from "../../models/authprop";
 
-export default function Login() {
+export default function Login(prop : AuthProp) {
   const [credentials, setCredentials] = useState({
     username: "",
     password: ""
   });
-  const [rememberMe, setRememberMe] = useState(false);
+
+  const [invalidForm, setInvalidForm] = useState(false)
+  const [rememberMe, setRememberMe] = useState(false)
 
   function handleCredentials(e: any) {
     setCredentials({
@@ -26,11 +29,15 @@ export default function Login() {
           credentials, 
           { withCredentials: true }
       ).then(() => {
+        prop.setUser
         const nav = useNavigate()
         nav("/dashboard")
       }).catch(err => {
         console.log(err)
+        prop.unsetUser
       })
+    } else {
+      setInvalidForm(true)
     }
   }
 
@@ -39,12 +46,12 @@ export default function Login() {
       <div className="w-[40%] bg-[#2B4EA2] grid justify-center align-middle items-center">
         <img
           src={image}
-          className="w-2/3 h-auto mx-auto"
+          className="w-[75%] h-auto mx-auto"
           alt=""
         />
       </div>
 
-      <div className="w-[60%] h-full bg-[#FFFFFF] flex justify-center">
+      <div className="w-[60%] h-full bg-[#FFFFFF] flex">
         <div className="inline-block w-[80%] m-auto">
           <form action="" method="POST" onSubmit={e => handleOnSubmit(e)} className="grid gap-6 justify-start">
             <div
@@ -66,7 +73,7 @@ export default function Login() {
               id="username"
               value={credentials.username}
             />
-
+            
             <input
               type="password"
               className="w-full h-[80px] font-[400] text-[32px] leading-[38px]
@@ -76,13 +83,17 @@ export default function Login() {
               value={credentials.password}
               onChange={e => handleCredentials(e)}
             />
-            <div
-              className="min-w-[670px] h-[33px] flex justify-between"
-            >
+
+            {invalidForm == true 
+              ? <p className="text-center text-red-700 font-medium">All fields are required *</p>
+              : <p className="invisible">Placeholder</p>
+            }
+
+            <div className="w-full h-[33px] flex justify-between">
               <div className="flex gap-2">
                 <input
                   type="checkbox"
-                  className="w-[33px] h-[33px] border-[2px] border-[#000000] rounded-[5px]"
+                  className="w-[33px] h-[33px] border-[2px] border-[#000000] rounded-[5px] hover:cursor-pointer"
                   onChange={() => setRememberMe(!rememberMe)}
                   id="rememberMe"
                   checked={rememberMe}
@@ -93,12 +104,12 @@ export default function Login() {
                   Remember me
                 </label>
               </div>
-              <p
+              <a
                 className="min-w-[244px] h-[28px]
-                font-[400] text-[24px] leading-[28px] underline"
+                font-[400] text-[24px] leading-[28px] underline hover:cursor-pointer text-black hover:text-blue"
               >
                 Forgot your password?
-              </p>
+              </a>
             </div>
 
             <input

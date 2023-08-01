@@ -15,7 +15,7 @@ const app = () => {
         handleSetUser()
     }, [])
 
-    const unsetUser = () => {
+    const handleUnsetUser = () => {
         setUser(undefined)
     }
 
@@ -33,7 +33,7 @@ const app = () => {
     return (
         <BrowserRouter>
         <Routes>
-            <Route path='/' element={<Login/>}/>
+            <Route path='/' element={<Login unsetUser={handleUnsetUser} setUser={handleSetUser}/>}/>
             <Route path='/dashboard' element={
                 <RouteGuard user={user}>
                     <Dashboard />

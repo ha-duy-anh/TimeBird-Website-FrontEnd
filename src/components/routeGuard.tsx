@@ -1,5 +1,4 @@
-import Login from '../pages/Login/Login'
-import { Navigate, useNavigate } from "react-router-dom"
+import { Navigate } from "react-router-dom"
 
 interface RouteGuardProp {
     user : string|undefined,
