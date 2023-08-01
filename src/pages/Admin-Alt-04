@@ -8,6 +8,10 @@ import iconCourses from './assets/iconCourses.svg'
 import iconUser from './assets/iconUser.svg'
 import iconAudit from './assets/iconAudit.svg'
 import iconNoti_Indi from './assets/iconNoti_Indi.svg'
+import calendar_alt04 from './assets/calendar_alt04.svg'
+import calendar_alt04_top from './assets/calendar_alt04_top.svg'
+import calendar_alt04_red from './assets/calendar_alt04_red.svg'
+import rectangleCourses from './assets/rectangleCourses.svg'
 import './index.css'
 
 
@@ -90,6 +94,44 @@ function App() {
    <div>
    <span className='absolute mt-[100px] ml-[352px] text-sky-700 font-bold text-2xl'>Current Semester</span> 
    </div>
+    
+    <div className='absolute bg-white h-[150px] w-[1510px] mt-[150px] ml-[352px] rounded-md'>
+      <p className='text-lg font-bold mt-[50px] ml-[50px]'>Name</p>
+      <p className='text-sky-700 text-lg font-bold ml-[50px]'>Fall 2023</p>
+      
+    </div>
+    
+  <div>
+  <img src={calendar_alt04} className='absolute mt-[180px] ml-[652px]'></img>
+  <img src={calendar_alt04_top} className=' absolute mt-[180px] ml-[656px]'></img>
+  </div>
+
+  <div>
+  <img src={calendar_alt04} className='absolute mt-[180px] ml-[852px]'></img>
+  <img src={calendar_alt04_red} className=' absolute mt-[180px] ml-[856px]'></img>
+  </div>
+  <div>
+    <p className='mt-[199px] ml-[1100px] absolute font-bold'>No.of Courses: </p>
+    <img src={rectangleCourses} className='absolute mt-[180px] ml-[1220px]'></img>
+    <p className='absolute mt-[190px] ml-[1233px] text-white font-bold text-xl'>60</p>
+  </div>
+  <div>
+    <p className='mt-[199px] ml-[1400px] absolute font-bold'>No.of Students: </p>
+    <img src={rectangleCourses} className='absolute mt-[180px] ml-[1525px]'></img>
+    <p className='absolute mt-[190px] ml-[1531px] text-white font-bold text-xl'>130</p>
+  </div>
+  <div>
+    <p className='mt-[260px] ml-[1100px] absolute font-bold'>Completion:</p>
+    <p className='mt-[260px] ml-[1200px] absolute font-bold text-yellow-400'>60%</p>
+    <p className='mt-[260px] ml-[1400px] absolute font-bold'>Last Modified:</p>
+    <p className='mt-[260px] ml-[1515px] absolute font-bold'>05/09/2023</p>
+  </div>
+  <div>
+    <p className='mt-[230px] ml-[1685px] absolute font-bold text-blue-600 underline'>View Details</p>
+  </div>
+<div className='absolute bg-white h-[580px] w-[1510px] mt-[350px] ml-[352px] rounded-md'>
+  <p>All Semesters</p>
+</div>
 
   </body>
   )
