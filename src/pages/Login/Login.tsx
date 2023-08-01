@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import image from "../../assets/login-bg.png"
 import axios from "axios"
-import { Navigate, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 export default function Login() {
   const [credentials, setCredentials] = useState({
@@ -32,21 +32,6 @@ export default function Login() {
         console.log(err)
       })
     }
-    /*axios.get('http://localhost:3000/user/testCookie', 
-      {withCredentials: true}
-    ).then(res => {
-      console.log(res)
-    })*/
-    //nav("/dashboard")
-    // axios
-    //   .post("", credentials)
-    //   .then(res => {
-    //     console.log(res);
-    //     console.log(res.data);
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
   }
 
   return (

@@ -1,11 +1,10 @@
 import icSearch from '../../assets/ic_search.svg'
 import icList from '../../assets/ic_listDown.svg'
 import icSearchPage from '../../assets/ic_seachPageNo.svg'
-import { Link } from 'react-router-dom'
 import SideNavBar from '../../components/SideNavBar'
 import Header from '../../components/Header'
 
-export default function ManageCourses(props: any) {
+export default function ManageCourses() {
     return (
         <div>
             <SideNavBar />
@@ -130,7 +129,7 @@ export default function ManageCourses(props: any) {
 
                     <div className='flex'>
                         <label className='font-semibold text-[22px] text-[#A9A9C6]'>Go to page </label>
-                        <input type='number' id="pageNo" name="pageNo" className='border rounded-[10px] border-[#F2F2F4] border-[2px] ml-5 w-[72px]'/>
+                        <input type='number' id="pageNo" name="pageNo" className='rounded-[10px] border-[#F2F2F4] border-[2px] ml-5 w-[72px]'/>
                         <img 
                             src={icSearchPage}
                             className='inline-block ml-[10px]'
