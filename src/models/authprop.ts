@@ -1,4 +1,5 @@
 export interface AuthProp {
-    setUser : (role : string|null) => void,
+    setUsername : (username : string) => void,
+    setUser : (role : string) => void,
     unsetUser : () => void
 }

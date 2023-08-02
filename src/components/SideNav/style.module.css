@@ -1,0 +1,11 @@
+.links_outer_container a:hover p {
+    color: #1a4ac3;
+}
+
+.nav_link_container[data-current="true"] p {
+    color: #0030A5;
+}
+
+.nav_link_container[data-current="true"] {
+    background-color: #9dbaff;
+}

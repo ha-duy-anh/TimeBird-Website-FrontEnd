@@ -4,6 +4,7 @@ import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import { AuthProp } from "../../models/authprop"
 import style from './style.module.css'
+import { hanldeNav } from "utils/utils"
 
 export default function Login(prop : AuthProp) {
   const [credentials, setCredentials] = useState({
@@ -32,13 +33,9 @@ export default function Login(prop : AuthProp) {
           { withCredentials: true }
       ).then((response) => {
         console.log(response.data)
-        if (response.data.role.toLowerCase() === 'student') {
-          nav('/student')
-          prop.setUser('student')
-        } else if (response.data.role.toLowerCase() === 'superadmin') {
-          prop.setUser(response.data)
-          nav('/admin')
-        }
+        prop.setUser(response.data.role)
+        prop.setUsername(response.data.username)
+        hanldeNav(response.data.role, nav)
       }).catch(() => {
         prop.unsetUser
       })

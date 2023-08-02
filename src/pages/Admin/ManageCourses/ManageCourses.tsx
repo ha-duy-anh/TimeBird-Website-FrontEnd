@@ -1,7 +1,7 @@
 import icSearch from 'assets/ic_search.svg'
 import icList from 'assets/ic_listDown.svg'
 import icSearchPage from 'assets/ic_seachPageNo.svg'
-import SideNavBar from 'components/SideNavBar'
+import SideNavBar from 'components/SideNav'
 import Header from 'components/Header'
 
 export default function ManageCourses() {

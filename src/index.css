@@ -16,5 +16,28 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  --progress-bar-color: green;
   overflow-x: hidden;
+}
+
+html, body, #root {
+  height: fit-content;
+  background-color: #F2F2F4;
+  min-height: 100vh;
+}
+
+progress, progress::-webkit-progress-bar, progress::-webkit-progress-value {
+  border-radius: 10px;
+}
+
+progress[value="0"]::-webkit-progress-bar {
+  border: 2px solid red;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #F2F2F4;
+}
+
+progress::-webkit-progress-value {
+  background-color: var(--progress-bar-color);
 }

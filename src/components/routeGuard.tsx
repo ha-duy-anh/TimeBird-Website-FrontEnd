@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom"
 
-interface RouteGuardProp {
+type RouteGuardProp = {
     user : string|undefined,
     requiredRole: string
     children: JSX.Element
