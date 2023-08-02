@@ -3,7 +3,6 @@ import axios from 'axios'
 
 import Unit from 'models/unit'
 import CourseRegCard from 'components/CourseRegCard/index.tsx'
-import { useNavigate } from 'react-router-dom';
 
 const baseURL = "http://localhost:3000/test/get_current_sem_reg";
 interface responseData{
