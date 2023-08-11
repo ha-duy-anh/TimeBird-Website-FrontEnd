@@ -1,15 +1,10 @@
 import icSearch from 'assets/ic_search.svg'
 import icList from 'assets/ic_listDown.svg'
 import icSearchPage from 'assets/ic_seachPageNo.svg'
-import SideNavBar from 'components/SideNav'
-import Header from 'components/Header'
 
 export default function ManageCourses() {
     return (
         <div>
-            <SideNavBar />
-            <Header />
-
             {/* Semester Table */}
             <div className='absolute bg-[#ffffff] w-[1500px] h-[750px] left-[375px] top-[130px] rounded-[10px] overflow-auto'>
                 {/* Table Header */}
